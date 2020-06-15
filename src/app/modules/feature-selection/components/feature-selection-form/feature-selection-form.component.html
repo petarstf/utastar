@@ -1,0 +1,26 @@
+<div class="container" fxLayout="column" *ngIf="features.length > 0">
+  <div class="row" fxFlex fxLayout="row" fxLayoutAlign="center start">
+    <mat-card fxFlex='60'>
+      <mat-card-header fxLayoutAlign="center center">
+        <mat-card-title>Feature Selection Form</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-fab color='primary' (click)="onAddFeature()">+</button>
+        <form [formGroup]="featureForm" (ngSubmit) = "onSubmit()" *ngFor="let feature of featureForm.value.features; let i = index">
+          <div formArrayName="features">
+            <div class="form-group" [formGroupName]="i">
+              <mat-form-field appearance='outline'>
+                <mat-label>Feature name</mat-label>
+                <input matInput type="text" formControlName="featureName">
+              </mat-form-field>
+              <mat-form-field appearance='outline'>
+                <mat-label>Feature type</mat-label>
+                <input matInput type="text" formControlName="featureType">
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
