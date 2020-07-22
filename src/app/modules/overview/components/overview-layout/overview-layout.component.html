@@ -1,0 +1,42 @@
+<div class="container" fxLayout="column" *ngIf="tableDone; else notDone">
+  <div class="row" fxFlex style="margin: 3rem;" fxFlexOffset="3rem" fxFlexOffset.lt-sm="0" fxLayoutAlign="center stretch"
+  *ngIf="!loading && data; else loader"
+  >
+    <mat-tab-group fxFlex='70' mat-stretch-tabs class="mat-elevation-z4">
+      <mat-tab label="Multicriteria Table">
+        <app-overview-first [data]="textResponse"></app-overview-first>
+      </mat-tab>
+      <mat-tab label="Utilities">
+        <app-overview-second [data]="utilities"></app-overview-second>
+      </mat-tab>
+      <mat-tab label="Weights">
+        <app-overview-third [criteria]="crits" [data]="weights"></app-overview-third>
+      </mat-tab>
+      <mat-tab label="Marginal Utilities">
+        <app-overview-fourth [marginals]="marginals" [labels]="marginalLabels"></app-overview-fourth>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <ng-template #loader>
+    <div class="row" fxFlex style="margin: 3rem;" fxFlexOffset="3rem" fxFlexOffset.lt-sm="0" fxLayoutAlign="center start">
+      <mat-card fxLayout="column" style="margin: 5rem;">
+        <div class="header" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <span class="title">Doing the math</span>
+          <span class="subtitle">Please wait...</span>
+        </div>
+        <img src="/assets/images/loader.gif" alt="Loader image loading">
+      </mat-card>
+    </div>
+  </ng-template>
+
+</div>
+
+<ng-template #notDone>
+  <div class="container" fxLayoutAlign="start center" fxLayoutGap="35px" fxLayout="column">
+    <div fxFlexOffset="100px">
+      <img class="sadface" src="/assets/images/sadface.png" alt="Sadface img">
+    </div>
+    <span class="title">Multicriteria table is not done, you will be redirected to redo the table</span>
+  </div>
+</ng-template>

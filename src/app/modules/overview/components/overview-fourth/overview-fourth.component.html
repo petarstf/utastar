@@ -1,0 +1,23 @@
+<div class="container" fxLayout="column" style="padding: 1.5rem;" fxLayoutGap="30px">
+
+  <div class="header" fxLayoutAlign="center start">
+    <span class="title">Marginal Utilities</span>
+  </div>
+
+  <div style="display: block;" fxLayoutGap="1.5rem" style="margin-bottom: 1.5rem">
+    <canvas #chart baseChart
+      height="100"
+      width="200"
+      *ngFor="let marginal of marginals; let i = index"
+      [datasets]="datasets[i]"
+      [labels]="lineChartLabels[i]"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [colors]="lineChartColors[i]">
+    </canvas>
+  </div>
+  <!-- <div class="download" fxFlex fxLayoutAlign="center start" (click)="onDownload($event)">
+    <a color='accent' mat-raised-button >Download</a>
+  </div> -->
+</div>

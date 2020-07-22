@@ -1,0 +1,38 @@
+<mat-card-content fxLayout="column" fxLayoutGap="2rem">
+  <h2 class="title">Alternatives selection</h2>
+  <div class="add-feature" fxLayoutAlign="end center" fxLayoutGap="15px">
+    <span>Add a new alternative</span>
+    <button class="steps" mat-mini-fab color='' (click)="onAddAlternative()">
+      <mat-icon color='primary'>add</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="form">
+    <div formArrayName="alternatives" fxLayout="column">
+      <div class="form-group" fxLayoutAlign="center" [formGroupName]="i" *ngFor="let alternative of alternatives.controls; let i = index">
+        <div class="fields" fxFlex="70" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
+          <h3 class="subtitle">Alternative {{ i+1 }} </h3>
+          <div class="row" fxLayout="row" fxLayoutGap="25px">
+            <mat-form-field fxFlex appearance='outline'>
+              <mat-label>Alternative name</mat-label>
+              <input matInput type="text" formControlName="name" autocomplete="off">
+              <mat-error *ngIf="form.get(['alternatives', i, 'name']).errors">Please fill this field</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="alternatives.length > minNumber" fxFlex='15' class="delete" fxLayoutAlign="center start">
+          <button mat-fab color='warn' (click)="onRemoveAlternative(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayoutAlign="center center">
+      <button fxFlex='25' class="next-button" mat-raised-button type="button" color="primary"
+      (click)="onNext()">
+        Next
+      </button>
+    </div>
+  </form>
+</mat-card-content>

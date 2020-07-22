@@ -1,0 +1,23 @@
+<div class="container" fxLayout="column" style="padding: 1.5rem;" fxLayoutGap="30px">
+
+  <div class="header" fxLayoutAlign="center start">
+    <span class="title">Weights</span>
+  </div>
+
+  <div style="display: block" fxFlexOffset="1.5rem">
+    <canvas #chart baseChart
+      height="100"
+      width="200"
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+      [colors]="barChartColors">
+    </canvas>
+  </div>
+  <div class="download" fxFlex fxLayoutAlign="center start" (click)="onDownload($event)">
+    <a target="_blank" color='primary' mat-raised-button>Download</a>
+  </div>
+</div>

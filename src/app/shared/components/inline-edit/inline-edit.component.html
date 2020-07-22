@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="mat-subheading-2">Add a comment</div>
+
+  <mat-form-field>
+    <input matInput maxLength="140" name="comment" [(ngModel)]="comment" autocomplete="off" (keyup) = "checkValue()">
+    <mat-hint align="end" *ngIf="column < rankingCol">{{min}} - {{ max }}</mat-hint>
+    <mat-error *ngIf="!disabled"><span>Value must be between {{ min }} and {{ max }}</span></mat-error>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button type="button" color="primary" (click)="onCancel()">CANCEL</button>
+    <button mat-button type="submit" color="primary" [disabled]="disabled">SAVE</button>
+  </div>
+</form>

@@ -1,0 +1,79 @@
+<mat-card-content fxLayout="column" fxLayoutGap="2rem">
+  <h2 class="title">Criteria selection</h2>
+  <div class="add-feature" fxLayoutAlign="end center" fxLayoutGap="15px">
+    <span>Add a new criterion</span>
+    <button class="steps" mat-mini-fab color='' (click)="onAddCriteria()">
+        <mat-icon color='primary'>add</mat-icon>
+      </button>
+  </div>
+
+  <form [formGroup]="form">
+    <div formArrayName="criteria" fxLayout="column">
+      <div class="form-group" fxFlex fxLayout="row" fxLayoutAlign="start" [formGroupName]="i"
+      *ngFor="let feature of criteria.controls; let i = index">
+        <div class="left" fxFlex fxLayout="column" fxLayoutGap='15px' fxLayoutAlign="start center">
+          <h3 class="subtitle">Criterion {{ i+1 }} </h3>
+          <div class="fields" fxFlex fxLayoutAlign="center start" fxLayout="column">
+            <div class="row" fxFlex='70' fxLayoutGap='25px'>
+              <mat-form-field fxFlex appearance='outline'>
+                <mat-label>Criteria name</mat-label>
+                <input matInput type="text" formControlName="name" autocomplete="off">
+                <mat-error *ngIf="form.get(['criteria', i, 'name']).errors">Please fill this field</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex appearance='outline'>
+                <mat-label>Criteria monotonicity</mat-label>
+                <mat-select formControlName="monotonicity">
+                  <mat-option *ngFor="let type of monotonicity" [value]="type.id">
+                    {{ type.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get(['criteria', i, 'monotonicity']).errors">Please select an option</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row" fxFlex='70' fxLayoutGap='25px'>
+              <mat-form-field fxFlex appearance='outline'>
+                <mat-label>Criteria minimum value</mat-label>
+                <input matInput type="number" formControlName='min' autocomplete="off">
+                <mat-error *ngIf="form.get(['criteria', i, 'min']).errors" >Please enter a valid value</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex appearance='outline'>
+                <mat-label>Criteria maximum value</mat-label>
+                <input matInput type="number" formControlName='max' autocomplete="off">
+                <mat-error *ngIf="form.get(['criteria', i, 'max']).errors">Please enter a valid value</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row" fxFlex='70' fxLayoutGap='25px'>
+              <mat-form-field fxFlex appearance='outline'>
+                <mat-label>Criteria type</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option *ngFor="let type of criteriaType" [value]="type.id">
+                    {{ type.name | titlecase }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get(['criteria', i, 'type']).errors">Please select a type</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex appearance='outline' *ngIf="form.get(['criteria', i, 'type']).value === 1">
+                <mat-label>Number of points</mat-label>
+                <input matInput type="number" formControlName='a' min='3' max='99' (change)="onNumberPointsChange($event, i)" autocomplete="off">
+                <mat-hint>Minimum number of points is 3</mat-hint>
+                <mat-error *ngIf="form.get(['criteria', i, 'a']).errors">Please enter a value</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="right" fxFlex="15" class="delete" fxLayoutAlign="start center">
+          <button mat-fab color='warn'  *ngIf="criteria.length > 3" (click)="onDeleteFeature(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayoutAlign="center center">
+      <button fxFlex='25' class="next-button" mat-raised-button type="button" color="primary"
+      (click)="onNext()">
+        Next
+      </button>
+    </div>
+  </form>
+</mat-card-content>
