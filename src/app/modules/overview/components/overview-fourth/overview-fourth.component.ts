@@ -111,6 +111,11 @@ export class OverviewFourthComponent implements OnInit {
             temp.push(0);
           }
         });
+
+        console.log('sort', temp.sort((a, b) => {
+          return this.labels[i][temp.indexOf(a)] - this.labels[i][temp.indexOf(b)];
+        }));
+        this.labels[i].sort((a, b) => a - b);
         // this.lineChartData.push({ data: e, label: this.criteria[i] });
         this.datasets.push([{ data: temp, label: this.criteria[i] }]);
         this.lineChartLabels.push(this.labels[i]);

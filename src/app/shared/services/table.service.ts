@@ -144,7 +144,7 @@ export class TableService {
     this.table.altName = 'alt/cri';
 
     this.table.criteria.forEach(c => {
-      if(c.type === 1) {
+      if(c.type === 0) {
         c.a = c.max - c.min + 1;
       }
       if(c.values == null) {

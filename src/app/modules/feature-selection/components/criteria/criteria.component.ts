@@ -93,4 +93,17 @@ export class CriteriaComponent implements OnInit {
     }
   }
 
+  checkMinMax(i: number, max: boolean) {
+    if(max) {
+      if(this.form.get(['criteria', i, 'max']).value > this.form.get(['criteria', i, 'min']).value) {
+        return true;
+      }
+      return false;
+    }
+    if(this.form.get(['criteria', i, 'max']).value < this.form.get(['criteria', i, 'min']).value) {
+      return true;
+    }
+    return false;
+  }
+
 }
